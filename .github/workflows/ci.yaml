@@ -17,3 +17,5 @@ jobs:
     - run: perf stat ls || true
     - run: cargo build
     - run: sudo ./target/debug/perftest || true
+      env:
+        RUST_BACKTRACE: 1
