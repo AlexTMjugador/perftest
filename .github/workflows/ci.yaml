@@ -1,8 +1,6 @@
 name: CI
 on:
   push:
-    branches:
-    - master
 
 jobs:
   rust:
@@ -12,8 +10,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - run: cat /proc/sys/kernel/perf_event_paranoid
-    - run: |
-        sudo sh -c 'echo -1 >/proc/sys/kernel/perf_event_paranoid'
-        sudo perf stat ls || true
+    - run: sudo sh -c 'echo 0 >/proc/sys/kernel/perf_event_paranoid'
+    - run: cat /proc/sys/kernel/perf_event_paranoid
+    - run: sudo perf stat ls || true
     - run: cargo build
-    - run: RUST_BACKTRACE=1 ./target/debug/perftest || true
+    - run: RUST_BACKTRACE=1 sudo ./target/debug/perftest
