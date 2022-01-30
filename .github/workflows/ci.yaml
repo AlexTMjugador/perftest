@@ -14,4 +14,4 @@ jobs:
     - run: cat /proc/sys/kernel/perf_event_paranoid
     - run: sudo perf stat ls || true
     - run: cargo build
-    - run: RUST_BACKTRACE=1 sudo ./target/debug/perftest
+    - run: sudo sh -c 'RUST_BACKTRACE=1 ./target/debug/perftest'
